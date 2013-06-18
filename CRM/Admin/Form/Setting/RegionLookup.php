@@ -26,14 +26,8 @@
 class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
   protected $_values;
 
-  function preProcess() {
-    // Needs to be here as from is built before default values are set
-    $this->_values = CRM_Core_BAO_Setting::getItem(REGIONLOOKUP_SETTINGS_GROUP);
-  }
-
   function setDefaultValues() {
-    $defaults = $this->_values;
-    return $defaults;
+    return CRM_Core_BAO_Setting::getItem(REGIONLOOKUP_SETTINGS_GROUP);
   }
 
   public function buildQuickForm() {
@@ -79,6 +73,7 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
       'postcode' => ts('Postcode'),
       'stateriding' => ts('State/Province riding'),
       'countryriding' => ts('Country riding'),
+      'callback' => ts('Custom callback'),
     );
   }
 }

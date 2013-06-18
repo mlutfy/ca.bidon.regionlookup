@@ -13,14 +13,14 @@ cj(function ($) {
 
     $.getJSON(query, function(data) {
       $.each(data, function(key, val) {
-        if (key != 'source' && settings.civicrmRegionLookup[key]) {
-          $(settings.civicrmRegionLookup[key]).val(val).change();
+        if (key != 'source' && CRM.regionlookup[key]) {
+          $(CRM.regionlookup[key]).val(val).change();
         }
       });
 
       // Call a custom callback function, if any
-      if (settings.civicrmRegionLookup.callback) {
-        eval(settings.civicrmRegionLookup.callback + '(data)');
+      if (CRM.regionlookup.callback) {
+        eval(CRM.regionlookup.callback + '(data)');
       }
     });
   });

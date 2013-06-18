@@ -57,5 +57,17 @@
     </table>
   </fieldset>
 
+  <fieldset>
+    <legend>{ts}Custom overrides{/ts}</legend>
+    <div class="help">{ts}Custom javascript function to call with the resulting data. This allows you to write your own custom callbacks and override how the response is handled.{/ts}</div>
+
+    <table class="form-layout-compressed">
+      <tr>
+        <td class="label">{$form.callback.label}</td>
+        <td>{$form.callback.html}</td>
+      </tr>
+    </table>
+  </fieldset>
+
   <div class="crm-submit-buttons">{include file="CRM/common/formButtons.tpl" location="bottom"}</div>
 </div>
