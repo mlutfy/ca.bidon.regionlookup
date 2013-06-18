@@ -7,4 +7,9 @@
     <adminGroup>System Settings</adminGroup>
     <access_arguments>administer CiviCRM</access_arguments>
   </item>
+  <item>
+     <path>civicrm/regionlookup/postcode</path>
+     <page_callback>CRM_RegionLookup_Page_Postcode</page_callback>
+     <access_arguments>access CiviCRM</access_arguments>
+  </item>
 </menu>

@@ -31,7 +31,7 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
   }
 
   public function buildQuickForm() {
-    $fields = $this->getFormFields();
+    $fields = CRM_RegionLookup_BAO_RegionLookup::getFields();
 
     foreach ($fields as $key => $label) {
       $this->add('text', $key, $label, CRM_Utils_Array::value($key, $this->_values), FALSE);
@@ -51,7 +51,7 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
   public function postProcess() {
     // store the submitted values in an array
     $params = $this->exportValues();
-    $fields = $this->getFormFields();
+    $fields = CRM_RegionLookup_BAO_RegionLookup::getFields();
 
     foreach ($fields as $key => $label) {
       $value = $params[$key];
@@ -59,22 +59,6 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
     }
 
     CRM_Core_Session::setStatus(ts('Settings saved.'), '', 'success');
-  }
-
-  private function getFormFields() {
-    return array(
-      'source' => ts('Field selector'),
-      'district' => ts('District'),
-      'borough' => ts('Borough'),
-      'city' => ts('City'),
-      'county' => ts('County'),
-      'state' => ts('State/Province'),
-      'country' => ts('Country'),
-      'postcode' => ts('Postcode'),
-      'stateriding' => ts('State/Province riding'),
-      'countryriding' => ts('Country riding'),
-      'callback' => ts('Custom callback'),
-    );
   }
 }
 
