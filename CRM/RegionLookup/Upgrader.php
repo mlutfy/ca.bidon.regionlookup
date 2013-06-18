@@ -9,17 +9,17 @@ class CRM_RegionLookup_Upgrader extends CRM_RegionLookup_Upgrader_Base {
   // upgrade tasks. They are executed in order (like Drupal's hook_update_N).
 
   /**
-   * Example: Run an external SQL script when the module is installed
+   * Run the external SQL script when the module is installed.
    */
   public function install() {
-    $this->executeSqlFile('sql/regionlookup-install.sql');
+    // $this->executeSqlFile('sql/regionlookup-install.sql');
   }
 
   /**
-   * Example: Run an external SQL script when the module is uninstalled
+   * Run the external SQL script when the module is uninstalled.
    */
   public function uninstall() {
-    $this->executeSqlFile('sql/regionlookup-uninstall.sql');
+    // $this->executeSqlFile('sql/regionlookup-uninstall.sql');
   }
 
   /**
@@ -111,5 +111,5 @@ class CRM_RegionLookup_Upgrader extends CRM_RegionLookup_Upgrader_Base {
     }
     return TRUE;
   } // */
-
 }
+

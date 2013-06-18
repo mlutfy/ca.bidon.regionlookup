@@ -40,7 +40,7 @@ class CRM_RegionLookup_Upgrader_Base {
       // FIXME auto-generate
       self::$instance = new CRM_RegionLookup_Upgrader(
         'ca.bidon.regionlookup',
-        __DIR__ .'/../../../'
+        realpath(__DIR__ .'/../../../')
       );
     }
     return self::$instance;
@@ -73,7 +73,34 @@ class CRM_RegionLookup_Upgrader_Base {
   // ******** Task helpers ********
 
   /**
+   * Run a CustomData file
+   *
+   * @param string $relativePath the CustomData XML file path (relative to this extension's dir)
+   * @return bool
+   */
+  public function executeCustomDataFile($relativePath) {
+    $xml_file = $this->extensionDir . '/' . $relativePath;
+    return $this->executeCustomDataFileByAbsPath($xml_file);
+  }
+
+  /**
+   * Run a CustomData file
+   *
+   * @param string $xml_file  the CustomData XML file path (absolute path)
+   * @return bool
+   */
+  protected static function executeCustomDataFileByAbsPath($xml_file) {
+    require_once 'CRM/Utils/Migrate/Import.php';
+    $import = new CRM_Utils_Migrate_Import();
+    $import->run($xml_file);
+    return TRUE;
+  }
+
+  /**
    * Run a SQL file
+   *
+   * @param string $relativePath the SQL file path (relative to this extension's dir)
+   * @return bool
    */
   public function executeSqlFile($relativePath) {
     CRM_Utils_File::sourceSQLFile(
@@ -213,6 +240,9 @@ class CRM_RegionLookup_Upgrader_Base {
   public function onInstall() {
     foreach (glob($this->extensionDir . '/sql/*_install.sql') as $file) {
       CRM_Utils_File::sourceSQLFile(CIVICRM_DSN, $file);
+    }
+    foreach (glob($this->extensionDir . '/xml/*_install.xml') as $file) {
+      $this->executeCustomDataFileByAbsPath($file);
     }
     if (is_callable(array($this, 'install'))) {
       $this->install();

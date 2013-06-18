@@ -1,7 +1,7 @@
-
 --
 -- Lookup table for a given postcode
 --
+
 CREATE TABLE `civicrm_regionlookup` (
   `postcode` varchar(12) NOT NULL DEFAULT '',
   `district` varchar(127) NOT NULL DEFAULT '',
@@ -13,5 +13,4 @@ CREATE TABLE `civicrm_regionlookup` (
   `state_riding` varchar(127) NOT NULL DEFAULT '',
   `country_riding` varchar(127) NOT NULL DEFAULT '',
   PRIMARY KEY (`postcode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
