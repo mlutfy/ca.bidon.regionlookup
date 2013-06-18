@@ -10,30 +10,30 @@ class CRM_RegionLookup_Upgrader extends CRM_RegionLookup_Upgrader_Base {
 
   /**
    * Example: Run an external SQL script when the module is installed
-   *
+   */
   public function install() {
-    $this->executeSqlFile('sql/myinstall.sql');
+    $this->executeSqlFile('sql/regionlookup-install.sql');
   }
 
   /**
    * Example: Run an external SQL script when the module is uninstalled
-   *
+   */
   public function uninstall() {
-   $this->executeSqlFile('sql/myuninstall.sql');
+    $this->executeSqlFile('sql/regionlookup-uninstall.sql');
   }
 
   /**
    * Example: Run a simple query when a module is enabled
-   *
+   */
   public function enable() {
-    CRM_Core_DAO::executeQuery('UPDATE foo SET is_active = 1 WHERE bar = "whiz"');
+    // CRM_Core_DAO::executeQuery('UPDATE foo SET is_active = 1 WHERE bar = "whiz"');
   }
 
   /**
    * Example: Run a simple query when a module is disabled
-   *
+   */
   public function disable() {
-    CRM_Core_DAO::executeQuery('UPDATE foo SET is_active = 0 WHERE bar = "whiz"');
+    // CRM_Core_DAO::executeQuery('UPDATE foo SET is_active = 0 WHERE bar = "whiz"');
   }
 
   /**
