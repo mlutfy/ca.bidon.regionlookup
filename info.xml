@@ -1,21 +1,22 @@
 <?xml version="1.0"?>
 <extension key="ca.bidon.regionlookup" type="module">
   <file>regionlookup</file>
-  <name>FIXME</name>
-  <description>FIXME</description>
-  <license>FIXME</license>
+  <name>CiviCRM Region Lookup</name>
+  <description>Lookup the region of a contact depending on their postcode (or other field).</description>
+  <license>AGPL v3</license>
   <maintainer>
-    <author>FIXME</author>
-    <email>FIXME@example.com</email>
+    <author>Mathieu Lutfy</author>
+    <email>mathieu@bidon.ca</email>
   </maintainer>
   <releaseDate>2013-06-18</releaseDate>
   <version>1.0</version>
-  <develStage>alpha</develStage>
+  <develStage>beta</develStage>
   <compatibility>
     <ver>4.2</ver>
+    <ver>4.3</ver>
   </compatibility>
-  <comments>This is a new, undeveloped module</comments>
+  <comments>CiviCRM extension based on the Drupal-based module civicrm_regionlookup.</comments>
   <civix>
-    <namespace>CRM/Regionlookup</namespace>
+    <namespace>CRM/RegionLookup</namespace>
   </civix>
 </extension>
