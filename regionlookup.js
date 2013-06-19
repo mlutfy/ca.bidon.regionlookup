@@ -12,11 +12,13 @@ cj(function ($) {
     var query = '/civicrm/regionlookup/postcode/' + $(this).val() + '.json';
 
     $.getJSON(query, function(data) {
-      $.each(data, function(key, val) {
-        if (key != 'source' && CRM.regionlookup[key]) {
-          $(CRM.regionlookup[key]).val(val).change();
-        }
-      });
+      if (data) {
+        $.each(data, function(key, val) {
+          if (key != 'source' && CRM.regionlookup[key]) {
+            $(CRM.regionlookup[key]).val(val).change();
+          }
+        });
+      }
 
       // Call a custom callback function, if any
       if (CRM.regionlookup.callback) {
