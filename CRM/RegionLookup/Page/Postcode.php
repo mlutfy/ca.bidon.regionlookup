@@ -1,15 +1,17 @@
 <?php
 
 /**
- * Calculates the different between two dates.
- *
- * Initially based on CRM_Utils_Date::calculateAge, but then
- * discovered DateTime::diff().
+ * Returns the matching entries for a given search lookup.
+ * Assumes our lookup is a postcode, but could be another field.
  */
 class CRM_RegionLookup_Page_Postcode extends CRM_Core_Page {
   function run() {
     $result = NULL;
 
+    // A mostly useless verification to make sure we are called
+    // from /civicrm/regionlookup/postcode/[...], but we need
+    // to extract the postcode from, for example:
+    // civicrm/regionlookup/postcode/h1h2h2.json
     $config = CRM_Core_Config::singleton();
     $urlVar = $config->userFrameworkURLVar;
     $arg = explode('/', $_GET[$urlVar]);
