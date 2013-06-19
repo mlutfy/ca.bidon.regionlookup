@@ -11,9 +11,15 @@
         </td>
       </tr>
       <tr>
+        <td class="label">{$form.searchprefix.label}</td>
+        <td>{$form.searchprefix.html}<br />
+          <span class="description">{ts}This allows to find the closest match. For example, you may have the H1H postcode mapped to a value, with the exception of H1H 2A2 mapped to another value.{/ts}</span>
+        </td>
+      </tr>
+      <tr>
         <td class="label">{$form.searchwildcard.label}</td>
         <td>{$form.searchwildcard.html}<br />
-          <span class="description">{ts}This allows to search on partial matches. Makes sense mostly if used with the other options below.{/ts}</span>
+          <span class="description">{ts}This allows to search on partial matches. Makes sense mostly if used with the other options below. <strong>TODO: not implemented yet.</strong>{/ts}</span>
         </td>
       </tr>
       <tr>

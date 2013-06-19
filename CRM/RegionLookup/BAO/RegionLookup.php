@@ -29,6 +29,7 @@ class CRM_RegionLookup_BAO_RegionLookup {
    */
   static function getSearchYesNoOptions() {
     return array(
+      'searchprefix' => ts('Enable prefix-searching?'),
       'searchwildcard' => ts('Enable wildcard search?'),
       'searchonkeyup' => ts('Trigger search as the user types?'),
     );
