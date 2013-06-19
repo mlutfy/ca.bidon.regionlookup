@@ -32,9 +32,19 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
 
   public function buildQuickForm() {
     $fields = CRM_RegionLookup_BAO_RegionLookup::getFields();
+    $yesno = CRM_RegionLookup_BAO_RegionLookup::getSearchYesNoOptions();
+    $other = CRM_RegionLookup_BAO_RegionLookup::getSearchOtherOptions();
 
     foreach ($fields as $key => $label) {
-      $this->add('text', $key, $label, CRM_Utils_Array::value($key, $this->_values), FALSE);
+      $this->add('text', $key, $label);
+    }
+
+    foreach ($yesno as $key => $label) {
+      $this->addYesNo($key, $label);
+    }
+
+    foreach ($other as $key => $label) {
+      $this->add('text', $key, $label);
     }
 
     $this->applyFilter('__ALL__', 'trim');
@@ -51,9 +61,21 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
   public function postProcess() {
     // store the submitted values in an array
     $params = $this->exportValues();
-    $fields = CRM_RegionLookup_BAO_RegionLookup::getFields();
 
+    $fields = CRM_RegionLookup_BAO_RegionLookup::getFields();
     foreach ($fields as $key => $label) {
+      $value = $params[$key];
+      $result = CRM_Core_BAO_Setting::setItem($value, REGIONLOOKUP_SETTINGS_GROUP, $key);
+    }
+
+    $yesno = CRM_RegionLookup_BAO_RegionLookup::getSearchYesNoOptions();
+    foreach ($yesno as $key => $label) {
+      $value = $params[$key];
+      $result = CRM_Core_BAO_Setting::setItem($value, REGIONLOOKUP_SETTINGS_GROUP, $key);
+    }
+
+    $other = CRM_RegionLookup_BAO_RegionLookup::getSearchOtherOptions();
+    foreach ($other as $key => $label) {
       $value = $params[$key];
       $result = CRM_Core_BAO_Setting::setItem($value, REGIONLOOKUP_SETTINGS_GROUP, $key);
     }

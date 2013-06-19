@@ -23,5 +23,24 @@ class CRM_RegionLookup_BAO_RegionLookup {
       'callback' => ts('Custom callback'),
     );
   }
+
+  /**
+   * Returns a list of search yes/no options.
+   */
+  static function getSearchYesNoOptions() {
+    return array(
+      'searchwildcard' => ts('Enable wildcard search?'),
+      'searchonkeyup' => ts('Trigger search as the user types?'),
+    );
+  }
+
+  /**
+   * Returns a list of other search options (not very useful for now).
+   */
+  static function getSearchOtherOptions() {
+    return array(
+      'searchchars' => ts('How many characters to send to the lookup query?'),
+    );
+  }
 }
 

@@ -10,6 +10,24 @@
           <span class="description">{ts}For example: .billing_name_address-section input#billing_postal_code-5{/ts}</span>
         </td>
       </tr>
+      <tr>
+        <td class="label">{$form.searchwildcard.label}</td>
+        <td>{$form.searchwildcard.html}<br />
+          <span class="description">{ts}This allows to search on partial matches. Makes sense mostly if used with the other options below.{/ts}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">{$form.searchonkeyup.label}</td>
+        <td>{$form.searchonkeyup.html}<br />
+          <span class="description">{ts}Launches the search after each character typed by the user. Useful for partial matches with autocomplete. <strong>TODO: not implemented yet.</strong>{/ts}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">{$form.searchchars.label}</td>
+        <td>{$form.searchchars.html}<br />
+          <span class="description">{ts}For example, if your lookup only requires the first 3 digits of a postcode to find a match, enter 3 in this field. <strong>TODO: not implemented yet.</strong>{/ts}</span>
+        </td>
+      </tr>
     </table>
   </fieldset>
 
@@ -70,4 +88,6 @@
   </fieldset>
 
   <div class="crm-submit-buttons">{include file="CRM/common/formButtons.tpl" location="bottom"}</div>
+
+  <p class="crm-regionlookup-about">{ts 1="http://www.gnu.org/licenses/agpl-3.0.html"}Region Lookup is a CiviCRM extension openly available under the <a href="%1">GNU AGPL License</a>.{/ts} {ts 1="https://github.com/mlutfy/ca.bidon.regionlookup"}For new versions, bug reports or support, visit the <a href="%1">project page on github</a>.{/ts}</p>
 </div>
