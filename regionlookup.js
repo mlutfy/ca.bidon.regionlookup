@@ -9,7 +9,7 @@ cj(function ($) {
       return;
     }
 
-    var query = '/civicrm/regionlookup/postcode/' + $(this).val() + '.json';
+    var query = CRM.url('civicrm/regionlookup/postcode/') + $(this).val() + '.json';
 
     $.getJSON(query, function(data) {
       if (data) {
