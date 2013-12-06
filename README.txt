@@ -28,7 +28,7 @@ postcode (in Canada, the ridings per postcode are usually unique).
 Requirements
 ============
 
-- CiviCRM >= 4.2 (4.3 recommended)
+- CiviCRM >= 4.3 (latest CiviCRM version recommended)
 - optional: feeds, feeds_ui, ctools, job_scheduler 7.x-2.0-[...] to import CSV files
 
 Warning for nginx
