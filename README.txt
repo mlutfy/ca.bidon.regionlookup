@@ -93,6 +93,9 @@ basically says: find an element with the class "billing_name_address-section"
 (it may be a <div> or anything else), and in that element, find an "input"
 element with an ID "billing_postal_code-5" (the "#" means "id", "." means "class").
 
+For more information, see:
+https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors
+
 **Documentation from the old Drupal module for feeds:**
 
 1- Enable kt_district, services, feeds, etc.
