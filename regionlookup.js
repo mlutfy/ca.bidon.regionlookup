@@ -26,33 +26,4 @@ cj(function ($) {
       }
     });
   });
-
-/* Is this just old code? */
-/*
-
-  $('#Contact #address_1_postal_code', context).change(function() {
-    var query = '/civicrm_regionlookup/postcode/' + $(this).val() + '.json';
-
-    $.getJSON(query, function(data) {
-      $.each(data, function(key, val) {
-        if (key != 'source' && settings.civicrmRegionLookup[key]) {
-          var fieldid = settings.civicrmRegionLookup[key];
-
-          if (fieldid.substr(0, 8) == '#custom_') {
-            fieldid += '_-1';
-          }
-
-          $(fieldid).val(val).change();
-        }
-      });
-
-      // Call a custom callback function, if any
-      if (settings.civicrmRegionLookup.callback) {
-        eval(settings.civicrmRegionLookup.callback + '(data)');
-      }
-    });
-  });
-*/
-
 });
-
