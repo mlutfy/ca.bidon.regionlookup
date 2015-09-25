@@ -15,6 +15,8 @@ Once installed, a new menu item will be added to the System Settings (Administer
   <compatibility>
     <ver>4.3</ver>
     <ver>4.4</ver>
+    <ver>4.5</ver>
+    <ver>4.6</ver>
   </compatibility>
   <comments>CiviCRM extension based on the Drupal-based module civicrm_regionlookup. Still lacks proper import/update of lookup data.</comments>
   <urls>
