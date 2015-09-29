@@ -2,7 +2,7 @@
 
 /*
  +--------------------------------------------------------------------------+
- | Copyright (C) 2011-2013 Mathieu Lutfy                                    |
+ | Copyright (C) 2011-2015 Mathieu Lutfy                                    |
  | This file is part of CiviCRM Region Lookup (ca.bidon.regionlookup).      |
  |                                                                          |
  | Based on code (C) 2013 Nicolas Ganivet (CiviDesk)                        |
@@ -47,6 +47,9 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
       $this->add('text', $key, $label);
     }
 
+    $lookup_methods = CRM_RegionLookup_BAO_RegionLookup::getLookupMethods();
+    $this->addRadio('lookup_method', ts("Lookup method"), $lookup_methods, TRUE);
+
     $this->applyFilter('__ALL__', 'trim');
 
     $this->addButtons(array(
@@ -79,6 +82,9 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
       $value = $params[$key];
       $result = CRM_Core_BAO_Setting::setItem($value, REGIONLOOKUP_SETTINGS_GROUP, $key);
     }
+
+    // Lookup method
+    CRM_Core_BAO_Setting::setItem($params['lookup_method'], REGIONLOOKUP_SETTINGS_GROUP, 'lookup_method');
 
     CRM_Core_Session::setStatus(ts('Settings saved.'), '', 'success');
   }

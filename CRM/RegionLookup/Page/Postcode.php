@@ -25,40 +25,30 @@ class CRM_RegionLookup_Page_Postcode extends CRM_Core_Page {
       // Clean out the .json suffix
       $postcode = str_replace('.json', '', $postcode);
 
-      // Transform to lowercase, and remove anything non-alphanumeric
-      $postcode = strtolower($postcode);
-      $postcode = preg_replace('/[^a-z0-9]/', '', $postcode);
-
-      $query = 'SELECT * FROM civicrm_regionlookup WHERE postcode = %1';
-      $params = array(
-        1 => array($postcode, 'String'),
-      );
-
-      if ($settings['searchprefix']) {
-        $string = substr($postcode, 0, -1);
-        $cpt = 2;
-
-        while ($string) {
-          $params[$cpt] = array($string, 'String');
-          $string = substr($string, 0, -1);
-          $query .= ' OR postcode = %' . $cpt;
-          $cpt++;
+      if (! empty($settings['lookup_method'])) {
+        if (class_exists($settings['lookup_method'])) {
+          // Classes must implement 'lookup'. This is our cheap way of enforcing
+          // a minimum of security and make sure we're not calling random functions
+          // because of a config error.
+          $class = $settings['lookup_method'];
+          $results = call_user_func(array($class, 'lookup'), $postcode);
         }
-
-        $query .= ' ORDER BY length(postcode) DESC';
+        else {
+          $results = CRM_RegionLookup_BAO_RegionLookup::lookup($postcode);
+        }
+      }
+      else {
+        $results = CRM_RegionLookup_BAO_RegionLookup::lookup($postcode);
       }
 
-      $dao = CRM_Core_DAO::executeQuery($query, $params);
-
-      if ($dao->fetch()) {
-        foreach ($fields as $key => $fieldname) {
-          $result[$key] = $dao->$key;
-        }
+      // FIXME: this for backwards compat, where we expect only one result.
+      if (! empty($results)) {
+        $result = $results[0];
       }
     }
 
     echo json_encode($result);
     CRM_Utils_System::civiExit();
   }
-}
 
+}

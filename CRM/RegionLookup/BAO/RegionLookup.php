@@ -43,5 +43,62 @@ class CRM_RegionLookup_BAO_RegionLookup {
       'searchchars' => ts('How many characters to send to the lookup query?'),
     );
   }
-}
 
+  static function getLookupMethods() {
+    $methods = array(
+      'CRM_RegionLookup_BAO_RegionLookup' => ts('Database'),
+    );
+
+    CRM_RegionLookup_Utils_Hook::getRegionLookupClasses($methods);
+    return $methods;
+  }
+
+  /**
+   *
+   * Returns an array of results.
+   */
+  static function lookup($value) {
+    $results = array();
+
+    $fields = CRM_RegionLookup_BAO_RegionLookup::getFields();
+    $settings = CRM_Core_BAO_Setting::getItem(REGIONLOOKUP_SETTINGS_GROUP);
+
+    // Transform to lowercase, and remove anything non-alphanumeric
+    $value = strtolower($value);
+    $value = preg_replace('/[^a-z0-9]/', '', $value);
+
+    $query = 'SELECT * FROM civicrm_regionlookup WHERE postcode = %1';
+    $params = array(
+      1 => array($value, 'String'),
+    );
+
+    if ($settings['searchprefix']) {
+      $string = substr($value, 0, -1);
+      $cpt = 2;
+
+      while ($string) {
+        $params[$cpt] = array($string, 'String');
+        $string = substr($string, 0, -1);
+        $query .= ' OR postcode = %' . $cpt;
+        $cpt++;
+      }
+
+      $query .= ' ORDER BY length(postcode) DESC';
+    }
+
+    $dao = CRM_Core_DAO::executeQuery($query, $params);
+
+    while ($dao->fetch()) {
+      $result = array();
+
+      foreach ($fields as $key => $fieldname) {
+        $result[$key] = $dao->$key;
+      }
+
+      $results[] = $result;
+    }
+
+    return $results;
+  }
+
+}

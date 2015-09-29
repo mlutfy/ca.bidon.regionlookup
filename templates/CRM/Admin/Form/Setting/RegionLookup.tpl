@@ -16,6 +16,7 @@
           <span class="description">{ts}This allows to find the closest match. For example, you may have the H1H postcode mapped to a value, with the exception of H1H 2A2 mapped to another value.{/ts}</span>
         </td>
       </tr>
+{*
       <tr>
         <td class="label">{$form.searchwildcard.label}</td>
         <td>{$form.searchwildcard.html}<br />
@@ -33,6 +34,19 @@
         <td>{$form.searchchars.html}<br />
           <span class="description">{ts}For example, if your lookup only requires the first 3 digits of a postcode to find a match, enter 3 in this field. <strong>TODO: not implemented yet.</strong>{/ts}</span>
         </td>
+      </tr>
+*}
+    </table>
+  </fieldset>
+
+  <fieldset>
+    <legend>{ts}Lookup method{/ts}</legend>
+    <div class="help">{ts}The default lookup method uses values in the 'civicrm_regionlookup' database table. You can configure external lookup sources with the help of third-party extensions. See the extension's README file for more information.{/ts}</div>
+
+    <table class="form-layout-compressed">
+      <tr>
+        <td class="label">{$form.lookup_method.label}</td>
+        <td>{$form.lookup_method.html}</td>
       </tr>
     </table>
   </fieldset>
