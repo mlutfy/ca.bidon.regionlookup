@@ -11,6 +11,12 @@
         </td>
       </tr>
       <tr>
+        <td class="label">{$form.source_country.label}</td>
+        <td>{$form.source_country.html}<br />
+          <span class="description">{ts}For example: .billing_name_address-section input#billing_postal_code-5{/ts}</span>
+        </td>
+      </tr>      
+      <tr>
         <td class="label">{$form.searchprefix.label}</td>
         <td>{$form.searchprefix.html}<br />
           <span class="description">{ts}This allows to find the closest match. For example, you may have the H1H postcode mapped to a value, with the exception of H1H 2A2 mapped to another value.{/ts}</span>

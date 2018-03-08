@@ -11,6 +11,7 @@ class CRM_RegionLookup_BAO_RegionLookup {
   static function getFields() {
     return array(
       'source' => ts('Field selector'),
+      'source_country' => ts('Field selector for country locking'),
       'district' => ts('District'),
       'borough' => ts('Borough'),
       'city' => ts('City'),
@@ -57,7 +58,8 @@ class CRM_RegionLookup_BAO_RegionLookup {
    *
    * Returns an array of results.
    */
-  static function lookup($value) {
+  static function lookup($value, $country) {
+
     $results = array();
 
     $fields = CRM_RegionLookup_BAO_RegionLookup::getFields();
@@ -68,9 +70,15 @@ class CRM_RegionLookup_BAO_RegionLookup {
     $value = preg_replace('/[^a-z0-9]/', '', $value);
 
     $query = 'SELECT * FROM civicrm_regionlookup WHERE postcode = %1';
+
     $params = array(
       1 => array($value, 'String'),
     );
+    // If we got a country specified, filter by that country
+    if ($country && $country != 'all') {
+      $query .= ' AND country = %2';
+      $params[2] = array($country, 'String');
+    }
 
     if ($settings['searchprefix']) {
       $string = substr($value, 0, -1);
@@ -89,8 +97,8 @@ class CRM_RegionLookup_BAO_RegionLookup {
     $dao = CRM_Core_DAO::executeQuery($query, $params);
 
     while ($dao->fetch()) {
-      $result = array();
 
+      $result = array();
       foreach ($fields as $key => $fieldname) {
         $result[$key] = $dao->$key;
       }
