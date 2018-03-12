@@ -3,7 +3,7 @@
 --
 
 CREATE TABLE IF NOT EXISTS `civicrm_regionlookup` (
-  `id` int(10) NOT NULL AUTO INCREMENT PRIMARY KEY,
+  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `postcode` varchar(12) NOT NULL DEFAULT '',
   `district` varchar(127) NOT NULL DEFAULT '',
   `borough` varchar(127) NOT NULL DEFAULT '',
