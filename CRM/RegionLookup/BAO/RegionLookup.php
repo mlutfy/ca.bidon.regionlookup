@@ -58,7 +58,7 @@ class CRM_RegionLookup_BAO_RegionLookup {
    *
    * Returns an array of results.
    */
-  static function lookup($value, $country) {
+  static function lookup($value, $country = null) {
 
     $results = array();
 
@@ -75,7 +75,7 @@ class CRM_RegionLookup_BAO_RegionLookup {
       1 => array($value, 'String'),
     );
     // If we got a country specified, filter by that country
-    if ($country && $country != 'all') {
+    if (!is_null($country) && $country != 'all') {
       $query .= ' AND country = %2';
       $params[2] = array($country, 'String');
     }

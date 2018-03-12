@@ -20,8 +20,14 @@ class CRM_RegionLookup_Page_Postcode extends CRM_Core_Page {
     $settings = CRM_Core_BAO_Setting::getItem(REGIONLOOKUP_SETTINGS_GROUP);
 
     if ($arg[1] == 'regionlookup' && $arg[2] == 'postcode') {
-      $country = $arg[3];
-      $postcode = $arg[4];
+
+      // Backward compatibility, check if we have one or two arguments supplied.
+      if ($arg[3] && $arg[4]) {
+        $country = $arg[3];
+        $postcode = $arg[4];
+      } else {
+        $postcode = $arg[3];
+      }
 
       // Clean out the .json suffix
       $postcode = str_replace('.json', '', $postcode);

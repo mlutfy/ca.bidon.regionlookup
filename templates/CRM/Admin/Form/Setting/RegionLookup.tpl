@@ -13,9 +13,9 @@
       <tr>
         <td class="label">{$form.source_country.label}</td>
         <td>{$form.source_country.html}<br />
-          <span class="description">{ts}For example: .billing_name_address-section input#billing_postal_code-5{/ts}</span>
+          <span class="description">{ts}For example: .billing_name_address-section input#country_id-5{/ts}</span>
         </td>
-      </tr>      
+      </tr>
       <tr>
         <td class="label">{$form.searchprefix.label}</td>
         <td>{$form.searchprefix.html}<br />
