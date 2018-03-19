@@ -121,10 +121,16 @@ function regionlookup_civicrm_buildForm($formName, &$form) {
   }
 
   $settings = CRM_Core_BAO_Setting::getItem(REGIONLOOKUP_SETTINGS_GROUP);
+  $translations = array(
+    'tr_multiple_records_title' => ts("Multiple results were found. Please select your preferred option by clicking on the link(s) below", array( 'domain' => 'ca.bidon.regionlookup')),
+    'tr_multiple_results' => ts('Multiple results found', array( 'domain' => 'ca.bidon.regionlookup')),
+    'tr_city' => ts('City'),
+    'tr_city_selector' => ts('Please select a city', array( 'domain' => 'ca.bidon.regionlookup')),
+  );
 
   CRM_Core_Resources::singleton()
     ->addScriptFile('ca.bidon.regionlookup', 'regionlookup.js')
-    ->addSetting(array('regionlookup' => $settings));
+    ->addSetting(array('regionlookup' => $settings + $translations));
 
   $settings_already_set = TRUE;
 }

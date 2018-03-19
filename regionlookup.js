@@ -14,10 +14,7 @@ cj(function ($) {
 
       $this.addClass('crm-regionlookup-processed');
 
-      $this.change(function() {
-        crmFetchData($this, country);
-      });
-      $this.click(function() {
+      $this.focusout(function() {
         crmFetchData($this, country);
       });
     });
@@ -57,7 +54,7 @@ cj(function ($) {
             });
           });
         } else {
-          cities = ts("Multiple results were found. Please select your preferred option by clicking on the link(s) below");
+          cities = CRM.regionlookup.tr_multiple_records_title;
           cities += '<ul>';
           // More than one data is found
           $.each(data, function(key, val) {
@@ -66,19 +63,19 @@ cj(function ($) {
                 $(CRM.regionlookup[keyint]).val(valint).change();
                 if (keyint === 'city') {
                   var link_constructor = '<a href="#" title=' + keyint + ' onclick="cj(\'' + CRM.regionlookup[keyint] + '\').val(\''+valint+'\').change();return false;">' + valint + '</a>';
-                  cities += '<li class="suggested-' + key +'">' + ts('City') + ': '  + link_constructor + '</li>';
+                  cities += '<li class="suggested-' + key +'">' + CRM.regionlookup.tr_city + ': '  + link_constructor + '</li>';
                 }
               }
             });
           });
           cities += '</ul>';
-          cities += ts("Please select a city");
+          cities += CRM.regionlookup.tr_city_selector;
           // Show a warning in the form of a dialogue
           CRM.$('<div class="multicities_selector"></div>').dialog({
             modal: true,
             width: 500,
             height: 400,
-            title: ts("Multiple results found"),
+            title: CRM.regionlookup.tr_multiple_results,
             open: function() {
               $(this).html(cities);
             },
