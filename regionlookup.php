@@ -24,6 +24,7 @@
 */
 
 define('REGIONLOOKUP_SETTINGS_GROUP', 'RegionLookup Extension');
+define('REGIONLOOKUP_SETTINGS_NAME', 'regionlookup');
 
 require_once 'regionlookup.civix.php';
 
@@ -120,7 +121,8 @@ function regionlookup_civicrm_buildForm($formName, &$form) {
     return;
   }
 
-  $settings = CRM_Core_BAO_Setting::getItem(REGIONLOOKUP_SETTINGS_GROUP);
+  $settings = CRM_Core_BAO_Setting::getItem(REGIONLOOKUP_SETTINGS_GROUP, REGIONLOOKUP_SETTINGS_NAME);
+
 
   CRM_Core_Resources::singleton()
     ->addScriptFile('ca.bidon.regionlookup', 'regionlookup.js')

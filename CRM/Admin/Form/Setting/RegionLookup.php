@@ -27,7 +27,7 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
   protected $_values;
 
   function setDefaultValues() {
-    return CRM_Core_BAO_Setting::getItem(REGIONLOOKUP_SETTINGS_GROUP);
+    return CRM_Core_BAO_Setting::getItem(REGIONLOOKUP_SETTINGS_GROUP, REGIONLOOKUP_SETTINGS_NAME);
   }
 
   public function buildQuickForm() {
@@ -65,26 +65,29 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
     // store the submitted values in an array
     $params = $this->exportValues();
 
+    $values = array();
+
     $fields = CRM_RegionLookup_BAO_RegionLookup::getFields();
     foreach ($fields as $key => $label) {
-      $value = $params[$key];
-      $result = CRM_Core_BAO_Setting::setItem($value, REGIONLOOKUP_SETTINGS_GROUP, $key);
+      $values[$key] = $params[$key];
     }
 
     $yesno = CRM_RegionLookup_BAO_RegionLookup::getSearchYesNoOptions();
     foreach ($yesno as $key => $label) {
-      $value = $params[$key];
-      $result = CRM_Core_BAO_Setting::setItem($value, REGIONLOOKUP_SETTINGS_GROUP, $key);
+      $values[$key] = $params[$key];
     }
 
     $other = CRM_RegionLookup_BAO_RegionLookup::getSearchOtherOptions();
     foreach ($other as $key => $label) {
-      $value = $params[$key];
-      $result = CRM_Core_BAO_Setting::setItem($value, REGIONLOOKUP_SETTINGS_GROUP, $key);
+      $values[$key] = $params[$key];
     }
 
     // Lookup method
-    CRM_Core_BAO_Setting::setItem($params['lookup_method'], REGIONLOOKUP_SETTINGS_GROUP, 'lookup_method');
+    $values['lookup_method'] = $params['lookup_method'];
+
+    // persist settings in database
+    $result = CRM_Core_BAO_Setting::setItem($values, REGIONLOOKUP_SETTINGS_GROUP, REGIONLOOKUP_SETTINGS_NAME);
+
 
     CRM_Core_Session::setStatus(ts('Settings saved.'), '', 'success');
   }
