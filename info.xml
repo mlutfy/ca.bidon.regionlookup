@@ -9,10 +9,11 @@ Once installed, a new menu item will be added to the System Settings (Administer
     <author>Mathieu Lutfy</author>
     <email>mathieu@bidon.ca</email>
   </maintainer>
-  <releaseDate>2013-12-06</releaseDate>
-  <version>1.3</version>
+  <releaseDate>2019-02-27</releaseDate>
+  <version>2.0</version>
   <develStage>stable</develStage>
   <compatibility>
+    <ver>4.7</ver>
     <ver>5.0</ver>
   </compatibility>
   <comments>CiviCRM extension based on the Drupal-based module civicrm_regionlookup. Still lacks proper import/update of lookup data.</comments>
@@ -23,6 +24,6 @@ Once installed, a new menu item will be added to the System Settings (Administer
     <url desc="Licensing">http://civicrm.org/licensing</url>
   </urls>
   <civix>
-    <namespace>CRM/RegionLookup</namespace>
+    <namespace>CRM/Regionlookup</namespace>
   </civix>
 </extension>
