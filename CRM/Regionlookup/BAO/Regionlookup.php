@@ -3,14 +3,16 @@
 /**
  * This class contains helper functions.
  */
-class CRM_RegionLookup_BAO_RegionLookup {
+class CRM_Regionlookup_BAO_Regionlookup {
   /**
    * Returns a list of fields handled by the extension.
    * Used by the admin settings forms, as well as the ajax response function.
    */
   static function getFields() {
+
     return array(
-      'source' => ts('Field selector'),
+      'source' => ts('Field selector (trigger)'),
+      'source_country' => ts('Field selector for country (additional trigger) - Optional'),
       'district' => ts('District'),
       'borough' => ts('Borough'),
       'city' => ts('City'),
@@ -46,10 +48,10 @@ class CRM_RegionLookup_BAO_RegionLookup {
 
   static function getLookupMethods() {
     $methods = array(
-      'CRM_RegionLookup_BAO_RegionLookup' => ts('Database'),
+      'CRM_Regionlookup_BAO_RegionLookup' => ts('Database'),
     );
 
-    CRM_RegionLookup_Utils_Hook::getRegionLookupClasses($methods);
+    CRM_Regionlookup_Utils_Hook::getRegionLookupClasses($methods);
     return $methods;
   }
 
@@ -57,23 +59,43 @@ class CRM_RegionLookup_BAO_RegionLookup {
    *
    * Returns an array of results.
    */
-  static function lookup($value) {
-    $results = array();
+  static function lookup($postcode, $country = null) {
 
-    $fields = CRM_RegionLookup_BAO_RegionLookup::getFields();
-    $settings = CRM_Core_BAO_Setting::getItem(REGIONLOOKUP_SETTINGS_GROUP);
+    $instance = new CRM_Regionlookup_BAO_Regionlookup();
+    $results  = $settings = array();
+
+    // Get all settings
+    $fields = $instance::getFields();
+    $stored_settings = Civi::settings()->get('regionlookup_settings');
+    foreach ($fields as $key => $value) {
+      $settings[$key] = $stored_settings['fields'][$key];
+    }
+    $yesno  = $instance::getSearchYesNoOptions();
+    foreach ($yesno as $key => $value) {
+      $settings[$key] = $stored_settings['yesno'][$key];
+    }
+    $other  = $instance::getSearchOtherOptions();
+    foreach ($other as $key => $value) {
+      $settings[$key] = $stored_settings['other'][$key];
+    }
 
     // Transform to lowercase, and remove anything non-alphanumeric
-    $value = strtolower($value);
-    $value = preg_replace('/[^a-z0-9]/', '', $value);
+    $postcode = strtolower($postcode);
+    $postcode = preg_replace('/[^a-z0-9]/', '', $postcode);
 
     $query = 'SELECT * FROM civicrm_regionlookup WHERE postcode = %1';
+
     $params = array(
-      1 => array($value, 'String'),
+      1 => array($postcode, 'String'),
     );
+    // If we got a country specified, filter by that country
+    if (!is_null($country) && $country != 'all') {
+      $query .= ' AND country = %2';
+      $params[2] = array($country, 'String');
+    }
 
     if ($settings['searchprefix']) {
-      $string = substr($value, 0, -1);
+      $string = substr($postcode, 0, -1);
       $cpt = 2;
 
       while ($string) {
@@ -89,9 +111,15 @@ class CRM_RegionLookup_BAO_RegionLookup {
     $dao = CRM_Core_DAO::executeQuery($query, $params);
 
     while ($dao->fetch()) {
-      $result = array();
 
+      $result = array();
       foreach ($fields as $key => $fieldname) {
+        $result[$key] = $dao->$key;
+      }
+      foreach ($yesno as $key => $fieldname) {
+        $result[$key] = $dao->$key;
+      }
+      foreach ($other as $key => $fieldname) {
         $result[$key] = $dao->$key;
       }
 

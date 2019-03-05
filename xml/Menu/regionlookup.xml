@@ -3,13 +3,13 @@
   <item>
     <path>civicrm/admin/setting/regionlookup</path>
     <title>Region Lookup Settings</title>
-    <page_callback>CRM_Admin_Form_Setting_RegionLookup</page_callback>
+    <page_callback>CRM_Regionlookup_Admin_Form_Setting_Regionlookup</page_callback>
     <adminGroup>System Settings</adminGroup>
     <access_arguments>administer CiviCRM</access_arguments>
   </item>
   <item>
      <path>civicrm/regionlookup/postcode</path>
-     <page_callback>CRM_RegionLookup_Page_Postcode</page_callback>
+     <page_callback>CRM_Regionlookup_Page_Postcode</page_callback>
      <access_arguments>access CiviCRM</access_arguments>
   </item>
 </menu>

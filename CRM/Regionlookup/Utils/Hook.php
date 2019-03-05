@@ -1,6 +1,6 @@
 <?php
 
-class CRM_RegionLookup_Utils_Hook {
+class CRM_Regionlookup_Utils_Hook {
   static $_nullObject = NULL;
 
   /**
