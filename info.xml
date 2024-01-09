@@ -10,7 +10,7 @@ Once installed, a new menu item will be added to the System Settings (Administer
     <email>mathieu@bidon.ca</email>
   </maintainer>
   <releaseDate>2024-01-09</releaseDate>
-  <version>1.4</version>
+  <version>1.5.0</version>
   <develStage>stable</develStage>
   <compatibility>
     <ver>5.65</ver>
