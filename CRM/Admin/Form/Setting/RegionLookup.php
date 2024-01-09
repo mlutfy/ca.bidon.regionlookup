@@ -48,7 +48,7 @@ class CRM_Admin_Form_Setting_RegionLookup extends CRM_Admin_Form_Setting {
     }
 
     $lookup_methods = CRM_RegionLookup_BAO_RegionLookup::getLookupMethods();
-    $this->addRadio('lookup_method', ts("Lookup method"), $lookup_methods, TRUE);
+    $this->addRadio('lookup_method', ts("Lookup method"), $lookup_methods);
 
     $this->applyFilter('__ALL__', 'trim');
 

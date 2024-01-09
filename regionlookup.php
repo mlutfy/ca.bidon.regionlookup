@@ -49,18 +49,6 @@ function regionlookup_civicrm_enable() {
 }
 
 /**
- * Implementation of hook_civicrm_navigationMenu
- */
-function regionlookup_civicrm_navigationMenu( &$params ) {
-  // Inserts a navigation item in the menu, assuming the admin has not completely changed it.
-  _regionlookup_civix_insert_navigationMenu($params, 'Administer/System Settings', array(
-    'name' => 'Region Lookup Settings',
-    'url' => 'civicrm/admin/setting/regionlookup',
-    'permission' => 'administer CiviCRM',
-  ));
-}
-
-/**
  * Implements hook_civicrm_buildForm().
  *
  * Injects the settings to know on which field to trigger the lookup.

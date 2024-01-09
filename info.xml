@@ -29,6 +29,7 @@ Once installed, a new menu item will be added to the System Settings (Administer
   <mixins>
     <mixin>menu-xml@1.0.0</mixin>
     <mixin>smarty-v2@1.0.1</mixin>
+    <mixin>mgd-php@1.0.0</mixin>
   </mixins>
   <classloader>
     <psr0 prefix="CRM_" path="."/>
